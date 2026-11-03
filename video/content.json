@@ -1,0 +1,77 @@
+{
+  "theme": {
+    "bg1": "#070912",
+    "bg2": "#151036",
+    "glowA": "#835bf8",
+    "glowB": "#38bdf8",
+    "accent": "#835bf8",
+    "accent2": "#38bdf8",
+    "ok": "#34d399",
+    "warn": "#fb7185",
+    "text": "#f5f7ff",
+    "muted": "#9aa3c7"
+  },
+  "scenes": {
+    "s1": {
+      "time": 0,
+      "name": "El Dolor",
+      "kicker": "EL DRENAJE FANTASMA",
+      "h1Line1": "¿Cierras tu Mac al 100%…",
+      "h1Line2": "y al abrirla perdió batería?",
+      "sub1": "Pasa en silencio, mientras crees\nque está dormida."
+    },
+    "s2": {
+      "time": 10,
+      "name": "El Culpable",
+      "kicker": "EL CULPABLE",
+      "h1Line1": "Tu Wi‑Fi nunca duerme",
+      "h1Line2": "Tapa cerrada ≠\nahorro en batería",
+      "body1": "Power Nap sigue buscando redes y sincronizando..."
+    },
+    "s3": {
+      "time": 20,
+      "name": "La Solución",
+      "kicker": "LA SOLUCIÓN",
+      "h2": "LidWiFi",
+      "body": "Protección automática de batería.",
+      "sub": "Vive en tu barra de menú.\nSin ventanas ni estorbos."
+    },
+    "s4": {
+      "time": 32,
+      "name": "Cómo Funciona",
+      "kicker": "AUTOMÁTICO",
+      "h2Line1": "Cero gasto de batería",
+      "h2Line2": "mientras duerme",
+      "step1": "Cierras la tapa → Wi‑Fi apagado",
+      "step2": "Consumo fantasma: 0%",
+      "step3": "Abres la tapa → Wi‑Fi de vuelta",
+      "step4": "Sin que tengas que acordarte",
+      "badgeOff": "Wi‑Fi OFF · Batería protegida",
+      "badgeOn": "Wi‑Fi ON · Conectado"
+    },
+    "s5": {
+      "time": 44,
+      "name": "El Impacto",
+      "kicker": "EL BENEFICIO REAL",
+      "title": "Tu batería dura cuando la usas",
+      "card1Emoji": "🔋",
+      "card1Title": "Ahorra 25–50%",
+      "card1Desc": "de batería en reposo\nprolongado.",
+      "card2Emoji": "🎒",
+      "card2Title": "No se calienta",
+      "card2Desc": "cuando viaja cerrada\nen tu mochila.",
+      "card3Emoji": "⚡",
+      "card3Title": "Conexión fácil",
+      "card3Desc": "y segura al abrirla,\nen un segundo."
+    },
+    "s6": {
+      "time": 52,
+      "name": "Outro e Instalación",
+      "title": "LidWiFi",
+      "tagline": "Cuida tu batería mientras tu Mac duerme.",
+      "installStep": "Doble clic en el ícono. Listo.",
+      "installSub": "Queda instalado en tu barra de menú.",
+      "tech": "100% Nativo · Open Source · Swift & IOKit"
+    }
+  }
+}

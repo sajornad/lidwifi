@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>LidWiFi — Lid Off. Wi‑Fi Off. More Battery.</title>
+  <style>
+    :root {
+      color-scheme: light;
+      /* Warm Editorial Cream & Near-Black + Green-to-Blue Gradient Palette */
+      --bg: #F5F2EB;
+      --surface: #FDFBF7;
+      --surface-subtle: #EAE5DA;
+      --ink: #111315;
+      --ink-secondary: #3D4248;
+      --ink-muted: #5C626A;
+      --green: #00E660;
+      --blue: #196EFF;
+      --blue-hover: #0052FF;
+      --blue-tint: #E5F0FF;
+      --brand-grad: linear-gradient(90deg, rgba(0, 230, 96, 1) 0%, rgba(25, 110, 255, 1) 100%);
+      --border: #C6C1B5;
+      --border-strong: #111315;
+      --error: #B91C1C;
+      --error-bg: #FEE2E2;
+      --success: #047857;
+      --success-bg: #D1FAE5;
+
+      /* Strict 4px / 8px Spacing Scale */
+      --s-1: 4px;
+      --s-2: 8px;
+      --s-3: 12px;
+      --s-4: 16px;
+      --s-6: 24px;
+      --s-8: 32px;
+      --s-12: 48px;
+      --s-16: 64px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding: var(--s-12) var(--s-16);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: var(--s-6) var(--s-6);
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: var(--s-6);
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: var(--s-12);
+      gap: var(--s-4);
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--s-3);
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .brand svg {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(17, 19, 21, 0.12);
+      flex-shrink: 0;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: var(--s-4);
+    }
+
+    .specs-pill {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      color: var(--ink-secondary);
+      background: var(--surface-subtle);
+      border: 1.5px solid var(--border);
+      padding: var(--s-2) var(--s-4);
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .specs-pill {
+        display: none;
+      }
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      background: var(--surface-subtle);
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      padding: var(--s-1);
+    }
+
+    .lang-btn {
+      min-width: 48px;
+      min-height: 40px;
+      background: transparent;
+      border: none;
+      color: var(--ink-secondary);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 0 var(--s-3);
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    @media (max-width: 768px) {
+      .lang-btn {
+        min-height: 44px;
+      }
+    }
+
+    .lang-btn.active {
+      background: #00E660;
+      background: var(--brand-grad);
+      color: #FFFFFF;
+      text-shadow: 0 1px 2px rgba(17, 19, 21, 0.35);
+    }
+
+    .lang-btn:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    /* GIANT HERO TYPOGRAPHY */
+    .hero-title {
+      font-size: clamp(4rem, 9.5vw, 7.75rem);
+      line-height: 0.94;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      margin-bottom: var(--s-6);
+      color: var(--ink);
+    }
+
+    .hero-title .line-1,
+    .hero-title .line-3 {
+      display: block;
+      color: var(--ink);
+    }
+
+    .hero-title .line-2 {
+      display: inline-block;
+      background: #00E660;
+      background: var(--brand-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: var(--blue);
+    }
+
+    .hero-title .accent-dot {
+      color: var(--green);
+    }
+
+    .hero-lead {
+      font-size: clamp(1.25rem, 2vw, 1.625rem);
+      line-height: 1.5;
+      color: var(--ink-secondary);
+      max-width: 58ch;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--s-8);
+    }
+
+    /* INLINE HERO CAPTURE CARD */
+    .capture-card {
+      background: var(--surface);
+      border: 2px solid var(--border-strong);
+      border-radius: 20px;
+      padding: var(--s-6);
+      max-width: 864px;
+      box-shadow: 0 8px 0 var(--border-strong);
+      margin-bottom: var(--s-12);
+    }
+
+    .field-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--s-2);
+      gap: var(--s-3);
+      flex-wrap: wrap;
+    }
+
+    .field-label {
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+    }
+
+    /* MANDATORY: Format hint above input so browser autofill popovers never cover it */
+    .hint {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+
+    .form-bar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--s-3);
+    }
+
+    @media (max-width: 680px) {
+      .form-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .email-input,
+    .modal-input {
+      height: 64px;
+      width: 100%;
+      background: #FFFFFF;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 0 var(--s-6);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    }
+
+    .modal-input {
+      height: 52px;
+      font-size: 16px;
+      padding: 0 var(--s-4);
+    }
+
+    .email-input::placeholder,
+    .modal-input::placeholder {
+      color: var(--ink-muted);
+    }
+
+    .email-input:focus-visible,
+    .modal-input:focus-visible {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 4px var(--blue-tint);
+    }
+
+    /* Deferred validation styling via :user-invalid */
+    .email-input:user-invalid,
+    .email-input.user-invalid-fallback,
+    .modal-input:user-invalid,
+    .modal-input.user-invalid-fallback {
+      border-color: var(--error);
+      background-color: var(--error-bg);
+    }
+
+    .email-input:user-valid,
+    .email-input.user-valid-fallback,
+    .modal-input:user-valid,
+    .modal-input.user-valid-fallback {
+      border-color: var(--success);
+    }
+
+    .error-msg {
+      display: none;
+      color: var(--error);
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: var(--s-2);
+    }
+
+    .form-bar:has(.email-input:user-invalid) + .error-msg,
+    .form-bar:has(.email-input.user-invalid-fallback) + .error-msg {
+      display: block;
+    }
+
+    .submit-btn {
+      height: 64px;
+      padding: 0 var(--s-8);
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      background: #00E660;
+      background: var(--brand-grad);
+      color: #FFFFFF;
+      text-shadow: 0 1px 2px rgba(17, 19, 21, 0.35);
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--s-2);
+      white-space: nowrap;
+      transition: filter 0.15s ease, transform 0.1s ease;
+    }
+
+    .submit-btn:hover {
+      filter: brightness(0.96) contrast(1.06);
+    }
+
+    .submit-btn:active {
+      transform: translateY(1px);
+    }
+
+    .submit-btn:focus-visible {
+      outline: 3px solid var(--ink);
+      outline-offset: 2px;
+    }
+
+    .submit-btn[disabled] {
+      opacity: 0.75;
+      cursor: wait;
+    }
+
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--s-4);
+      font-size: 14px;
+      color: var(--ink-secondary);
+      font-weight: 500;
+      margin-top: var(--s-4);
+      padding-top: var(--s-4);
+      border-top: 1px solid var(--surface-subtle);
+    }
+
+    .trust-row span strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .check-badge {
+      color: var(--blue);
+      font-weight: 900;
+      margin-right: var(--s-1);
+    }
+
+    .status-banner {
+      display: none;
+      margin-top: var(--s-4);
+      padding: var(--s-3) var(--s-4);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--s-3);
+      flex-wrap: wrap;
+    }
+
+    .status-banner.success {
+      display: flex;
+      background: var(--success-bg);
+      border: 1.5px solid var(--success);
+      color: #065F46;
+    }
+
+    /* NATIVE MODAL DIALOG MATCHING PAGE DESIGN */
+    dialog#gform-modal {
+      margin: auto;
+      width: min(640px, calc(100vw - 32px));
+      max-height: calc(100vh - 48px);
+      background: var(--surface);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 20px;
+      padding: 0;
+      box-shadow: 0 12px 0 var(--ink);
+    }
+
+    /* MANDATORY: Prevent scroll chaining from modal/backdrop to underlying page */
+    dialog:modal {
+      overscroll-behavior: contain;
+    }
+
+    dialog::backdrop {
+      overflow: hidden;
+      overscroll-behavior: contain;
+      background-color: rgba(17, 19, 21, 0.58);
+      backdrop-filter: blur(4px);
+    }
+
+    .modal-inner {
+      padding: var(--s-8);
+      overflow-y: auto;
+      max-height: calc(100vh - 52px);
+    }
+
+    @media (max-width: 640px) {
+      .modal-inner {
+        padding: var(--s-6);
+      }
+    }
+
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--s-4);
+      padding-bottom: var(--s-4);
+      border-bottom: 2px solid var(--ink);
+      margin-bottom: var(--s-6);
+    }
+
+    .modal-title {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .modal-sub {
+      font-size: 14px;
+      color: var(--ink-secondary);
+      margin-top: var(--s-1);
+      line-height: 1.45;
+    }
+
+    .close-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      border: 2px solid var(--ink);
+      background: var(--bg);
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 900;
+      cursor: pointer;
+      flex-shrink: 0;
+      display: inline-grid;
+      place-items: center;
+    }
+
+    .close-btn:hover {
+      background: var(--surface-subtle);
+    }
+
+    .q-group {
+      margin-bottom: var(--s-6);
+    }
+
+    .q-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: var(--s-2);
+    }
+
+    .q-req {
+      color: var(--blue);
+      margin-left: 2px;
+    }
+
+    .choice-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--s-2);
+    }
+
+    .choice-pill {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .choice-pill input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .choice-pill span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      background: #FFFFFF;
+      color: var(--ink-secondary);
+      font-size: 14px;
+      font-weight: 700;
+      transition: all 0.15s ease;
+    }
+
+    .choice-pill input:checked + span {
+      border-color: var(--ink);
+      background: var(--blue-tint);
+      color: var(--ink);
+      box-shadow: 0 3px 0 var(--ink);
+    }
+
+    .choice-pill input:focus-visible + span {
+      outline: 3px solid var(--blue);
+      outline-offset: 2px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--s-3);
+      padding-top: var(--s-4);
+      border-top: 1px solid var(--surface-subtle);
+    }
+
+    .modal-submit {
+      width: 100%;
+      height: 56px;
+      font-size: 18px;
+    }
+
+    /* VALUE PILLARS (LESS TEXT, MORE VALUE) */
+    .value-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--s-6);
+    }
+
+    @media (max-width: 860px) {
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .value-card {
+      background: var(--surface);
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      padding: var(--s-6);
+    }
+
+    .value-metric {
+      display: inline-block;
+      font-size: clamp(2.5rem, 3.8vw, 3.25rem);
+      font-weight: 900;
+      letter-spacing: -0.045em;
+      line-height: 1.1;
+      margin-bottom: var(--s-2);
+      background: #00E660;
+      background: var(--brand-grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: var(--blue);
+    }
+
+    .value-card h2 {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: var(--s-2);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .value-card p {
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink-secondary);
+      max-width: 42ch;
+    }
+
+    @media (forced-colors: active) {
+      .capture-card,
+      .value-card,
+      .email-input,
+      .modal-input,
+      .submit-btn,
+      dialog#gform-modal {
+        border: 2px solid CanvasText;
+      }
+
+      .hero-title .line-2,
+      .value-metric {
+        -webkit-text-fill-color: CanvasText;
+        color: CanvasText;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <a href="#" class="brand">
+        <svg viewBox="0 0 824 824" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LidWiFi app icon">
+          <defs>
+            <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#835bf8"/>
+              <stop offset="45%" stop-color="#6977fc"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="824" height="824" rx="188" fill="url(#bgGrad)"/>
+          <g fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="200" y1="590" x2="624" y2="590" stroke-width="56"/>
+            <circle cx="412" cy="496" r="38" fill="#ffffff" stroke="none"/>
+            <path d="M 314 416 A 136 136 0 0 1 510 416" stroke-width="56"/>
+            <path d="M 238 340 A 242 242 0 0 1 586 340" stroke-width="56"/>
+          </g>
+        </svg>
+        <span>LidWiFi</span>
+      </a>
+      <div class="header-right">
+        <div class="specs-pill" data-i18n="specs">macOS 13+ • Universal (Apple Silicon & Intel) • 2.3 MB</div>
+        <div class="lang-switch" role="group" aria-label="Language switch">
+          <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+          <button type="button" class="lang-btn" data-lang="es" aria-pressed="false">ES</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <h1 class="hero-title">
+        <span class="line-1" data-i18n="hero1">Lid Off.</span>
+        <span class="line-2" data-i18n="hero2">Wi‑Fi Off.</span>
+        <span class="line-3"><span data-i18n="hero3">More Battery</span><span class="accent-dot">.</span></span>
+      </h1>
+
+      <p class="hero-lead" data-i18n="lead">
+        Mac menu bar utility that turns Wi‑Fi off the moment you close your lid—and reconnects when you open it.
+      </p>
+
+      <!-- INLINE EMAIL INPUT THAT OPENS THE NATIVE GOOGLE FORM MODAL -->
+      <section class="capture-card" aria-label="Request LidWiFi Download Link">
+        <form id="inline-email-form">
+          <div class="field-header">
+            <label for="email" class="field-label" data-i18n="label">Get the Download Link by Email</label>
+            <span id="email-hint" class="hint" data-i18n="hint">Format: you@domain.com</span>
+          </div>
+          <div class="form-bar">
+            <input type="email" id="email" name="email" class="email-input" required autocomplete="email"
+              inputmode="email" autocorrect="off" autocapitalize="none" placeholder="you@domain.com"
+              aria-describedby="email-hint" aria-errormessage="email-error">
+            <button type="submit" class="submit-btn" id="open-modal-btn" data-i18n="cta">
+              Get Download Link →
+            </button>
+          </div>
+          <div id="email-error" class="error-msg" role="alert">
+            <span aria-hidden="true">✕</span>
+            <span data-i18n="error">Please enter a valid email address (e.g. alex@domain.com).</span>
+          </div>
+        </form>
+
+        <div id="status-banner" class="status-banner" role="status">
+          <span id="status-text" data-i18n="successMsg">✓ Registration complete! We just sent the LidWiFi.dmg download link to your email.</span>
+        </div>
+
+        <div class="trust-row">
+          <span><span class="check-badge" aria-hidden="true">✓</span><strong data-i18n="trust1">Download link sent to your email</strong></span>
+          <span><span class="check-badge" aria-hidden="true">✓</span><strong data-i18n="trust2Bold">Double-click install</strong> <span data-i18n="trust2Rest">to menu bar</span></span>
+          <span><span class="check-badge" aria-hidden="true">✓</span><strong data-i18n="trust3Bold">Native Swift</strong> <span data-i18n="trust3Rest">(0% CPU)</span></span>
+        </div>
+      </section>
+
+      <section class="value-grid" aria-label="Key Benefits">
+        <article class="value-card">
+          <div class="value-metric" data-i18n="m1">0% Drain</div>
+          <h2 data-i18n="t1">True Sleep in Your Bag</h2>
+          <p data-i18n="d1">Cuts Wi‑Fi via IOKit before sleep—zero network wakeups.</p>
+        </article>
+        <article class="value-card">
+          <div class="value-metric" data-i18n="m2">1‑Click</div>
+          <h2 data-i18n="t2">Direct to Menu Bar</h2>
+          <p data-i18n="d2">Double‑click the app—auto‑installs & runs immediately.</p>
+        </article>
+        <article class="value-card">
+          <div class="value-metric" data-i18n="m3">Smart</div>
+          <h2 data-i18n="t3">Respects Manual Off</h2>
+          <p data-i18n="d3">Turned Wi‑Fi off yourself? It stays off when you open the lid.</p>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <!-- NATIVE MODAL DIALOG FOR ALL GOOGLE FORM FIELDS (https://forms.gle/VtuzDXsMcZwFTCPD8) -->
+  <dialog id="gform-modal" closedby="any" aria-labelledby="modal-title">
+    <div class="modal-inner">
+      <div class="modal-top">
+        <div>
+          <h2 class="modal-title" id="modal-title" data-i18n="modalTitle">Where should we send LidWiFi.dmg?</h2>
+          <p class="modal-sub" data-i18n="modalSub">Complete these quick details and we will email your download link immediately.</p>
+        </div>
+        <form method="dialog">
+          <button type="submit" value="cancel" class="close-btn" aria-label="Close modal">✕</button>
+        </form>
+      </div>
+
+      <form id="google-full-form">
+        <!-- 1. Full Name (entry.1902514531) -->
+        <div class="q-group">
+          <label class="q-label" for="gf-name">
+            <span data-i18n="qName">What is your full name?</span><span class="q-req" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="gf-name" name="entry.1902514531" class="modal-input" required autocomplete="name"
+            placeholder="Alex Rivera" autofocus>
+        </div>
+
+        <!-- 2. Email Address (entry.254744361) -->
+        <div class="q-group">
+          <label class="q-label" for="gf-email">
+            <span data-i18n="qEmail">What is your email address?</span><span class="q-req" aria-hidden="true">*</span>
+          </label>
+          <input type="email" id="gf-email" name="entry.254744361" class="modal-input" required autocomplete="email"
+            inputmode="email" placeholder="you@domain.com">
+        </div>
+
+        <!-- 3. WhatsApp Number optional (entry.1527128844) -->
+        <div class="q-group">
+          <label class="q-label" for="gf-whatsapp" data-i18n="qWhatsapp">
+            What is your WhatsApp number (optional)?
+          </label>
+          <input type="tel" id="gf-whatsapp" name="entry.1527128844" class="modal-input" autocomplete="tel"
+            inputmode="tel" placeholder="+1 555 000 0000">
+        </div>
+
+        <!-- 4. How did you hear about LidWiFi? (entry.955042020) -->
+        <div class="q-group">
+          <span class="q-label" data-i18n="qHear">How did you hear about LidWiFi?</span>
+          <div class="choice-grid" role="radiogroup" aria-label="How did you hear about LidWiFi?">
+            <label class="choice-pill">
+              <input type="radio" name="entry.955042020" value="Product Hunt">
+              <span>Product Hunt</span>
+            </label>
+            <label class="choice-pill">
+              <input type="radio" name="entry.955042020" value="Social Media">
+              <span data-i18n="optSocial">Social Media</span>
+            </label>
+            <label class="choice-pill">
+              <input type="radio" name="entry.955042020" value="Tech Blog/News site">
+              <span data-i18n="optBlog">Tech Blog / News</span>
+            </label>
+            <label class="choice-pill">
+              <input type="radio" name="entry.955042020" value="Friend/Colleague">
+              <span data-i18n="optFriend">Friend / Colleague</span>
+            </label>
+            <label class="choice-pill">
+              <input type="radio" name="entry.955042020" value="Other">
+              <span data-i18n="optOther">Other</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- 5. Primary motivation (entry.361352581) -->
+        <div class="q-group">
+          <span class="q-label" data-i18n="qMotivation">What is your primary motivation for using LidWiFi?</span>
+          <div class="choice-grid" role="group" aria-label="Primary motivation">
+            <label class="choice-pill">
+              <input type="checkbox" name="entry.361352581" value="Extend battery life" checked>
+              <span data-i18n="motBattery">Extend battery life</span>
+            </label>
+            <label class="choice-pill">
+              <input type="checkbox" name="entry.361352581" value="Maintain privacy when lid is closed">
+              <span data-i18n="motPrivacy">Maintain privacy when lid is closed</span>
+            </label>
+            <label class="choice-pill">
+              <input type="checkbox" name="entry.361352581" value="Automate system settings">
+              <span data-i18n="motAutomate">Automate system settings</span>
+            </label>
+            <label class="choice-pill">
+              <input type="checkbox" name="entry.361352581" value="Improve power efficiency">
+              <span data-i18n="motEfficiency">Improve power efficiency</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="submit" class="submit-btn modal-submit" id="modal-submit-btn" data-i18n="modalCta">
+            Send LidWiFi.dmg Link to My Email →
+          </button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script>
+    const GOOGLE_FORM_ACTION = 'https://docs.google.com/forms/d/e/1FAIpQLSc_2MnptFMaQz28-d9_eonfqVAyFRU-JwCuqnGQUKCIo1asbA/formResponse';
+
+    const i18n = {
+      en: {
+        specs: 'macOS 13+ • Universal (Apple Silicon & Intel) • 2.3 MB',
+        hero1: 'Lid Off.',
+        hero2: 'Wi‑Fi Off.',
+        hero3: 'More Battery',
+        lead: 'Mac menu bar utility that turns Wi‑Fi off the moment you close your lid—and reconnects when you open it.',
+        label: 'Get the Download Link by Email',
+        hint: 'Format: you@domain.com',
+        placeholder: 'you@domain.com',
+        cta: 'Get Download Link →',
+        error: 'Please enter a valid email address (e.g. alex@domain.com).',
+        successMsg: '✓ Registration complete! We just sent the LidWiFi.dmg download link to your email.',
+        modalTitle: 'Where should we send LidWiFi.dmg?',
+        modalSub: 'Complete these quick details and we will email your download link immediately.',
+        qName: 'What is your full name?',
+        qEmail: 'What is your email address?',
+        qWhatsapp: 'What is your WhatsApp number (optional)?',
+        qHear: 'How did you hear about LidWiFi?',
+        optSocial: 'Social Media',
+        optBlog: 'Tech Blog / News',
+        optFriend: 'Friend / Colleague',
+        optOther: 'Other',
+        qMotivation: 'What is your primary motivation for using LidWiFi?',
+        motBattery: 'Extend battery life',
+        motPrivacy: 'Maintain privacy when lid is closed',
+        motAutomate: 'Automate system settings',
+        motEfficiency: 'Improve power efficiency',
+        modalCta: 'Send LidWiFi.dmg Link to My Email →',
+        modalSending: 'Sending Link to Your Email…',
+        trust1: 'Download link sent to your email',
+        trust2Bold: 'Double-click install',
+        trust2Rest: 'to menu bar',
+        trust3Bold: 'Native Swift',
+        trust3Rest: '(0% CPU)',
+        m1: '0% Drain',
+        t1: 'True Sleep in Your Bag',
+        d1: 'Cuts Wi‑Fi via IOKit before sleep—zero network wakeups.',
+        m2: '1‑Click',
+        t2: 'Direct to Menu Bar',
+        d2: 'Double‑click the app—auto‑installs & runs immediately.',
+        m3: 'Smart',
+        t3: 'Respects Manual Off',
+        d3: 'Turned Wi‑Fi off yourself? It stays off when you open the lid.'
+      },
+      es: {
+        specs: 'macOS 13+ • Universal (Apple Silicon e Intel) • 2.3 MB',
+        hero1: 'Tapa Cerrada.',
+        hero2: 'Wi‑Fi Apagado.',
+        hero3: 'Más Batería',
+        lead: 'Utilidad de barra de menú para Mac que apaga el Wi‑Fi al cerrar la tapa y lo reconecta al abrirla.',
+        label: 'Recibe el enlace de descarga en tu correo',
+        hint: 'Formato: tu@correo.com',
+        placeholder: 'tu@correo.com',
+        cta: 'Obtener enlace de descarga →',
+        error: 'Ingresa un correo válido (ej. nombre@dominio.com).',
+        successMsg: '✓ ¡Registro completado! Te acabamos de enviar el enlace de descarga de LidWiFi.dmg a tu correo.',
+        modalTitle: '¿A dónde enviamos LidWiFi.dmg?',
+        modalSub: 'Completa estos datos rápidos y te enviaremos el enlace de descarga a tu correo al instante.',
+        qName: '¿Cuál es tu nombre completo?',
+        qEmail: '¿Cuál es tu correo electrónico?',
+        qWhatsapp: '¿Cuál es tu número de WhatsApp (opcional)?',
+        qHear: '¿Cómo conociste LidWiFi?',
+        optSocial: 'Redes Sociales',
+        optBlog: 'Blog / Noticias Tech',
+        optFriend: 'Amigo / Colega',
+        optOther: 'Otro',
+        qMotivation: '¿Cuál es tu motivación principal para usar LidWiFi?',
+        motBattery: 'Extender la batería',
+        motPrivacy: 'Privacidad al cerrar la tapa',
+        motAutomate: 'Automatizar ajustes del sistema',
+        motEfficiency: 'Mejorar eficiencia energética',
+        modalCta: 'Enviarme el enlace de LidWiFi.dmg →',
+        modalSending: 'Enviando enlace a tu correo…',
+        trust1: 'Enlace enviado a tu correo',
+        trust2Bold: 'Doble clic e instala',
+        trust2Rest: 'en barra de menú',
+        trust3Bold: 'Swift Nativo',
+        trust3Rest: '(0% CPU)',
+        m1: '0% Drenaje',
+        t1: 'Reposo real en tu mochila',
+        d1: 'Corta el Wi‑Fi vía IOKit antes de dormir—cero despertares de red.',
+        m2: '1‑Clic',
+        t2: 'Directo a la Barra de Menú',
+        d2: 'Doble clic en la app—se instala y activa automáticamente.',
+        m3: 'Inteligente',
+        t3: 'Respeta tu apagado manual',
+        d3: '¿Apagaste el Wi‑Fi tú mismo? Seguirá apagado al abrir la tapa.'
+      }
+    };
+
+    // Purge any legacy PII stored in localStorage
+    try { localStorage.removeItem('lidwifi_leads'); } catch (_) {}
+
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+      const dict = i18n[lang];
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) el.textContent = dict[key];
+      });
+      const emailInput = document.getElementById('email');
+      if (emailInput) emailInput.placeholder = dict.placeholder;
+      document.querySelectorAll('.lang-btn').forEach((btn) => {
+        const isCurrent = btn.getAttribute('data-lang') === lang;
+        btn.classList.toggle('active', isCurrent);
+        btn.setAttribute('aria-pressed', isCurrent ? 'true' : 'false');
+      });
+    }
+
+    document.querySelectorAll('.lang-btn').forEach((btn) => {
+      btn.addEventListener('click', () => setLanguage(btn.getAttribute('data-lang')));
+    });
+
+    // Keep aria-invalid synced with :user-invalid
+    const syncAria = (el) => {
+      if (el && el.matches) {
+        el.setAttribute('aria-invalid', el.matches(':user-invalid') ? 'true' : 'false');
+      }
+    };
+    document.addEventListener('blur', (e) => syncAria(e.target), true);
+    document.addEventListener('input', (e) => {
+      if (e.target && e.target.hasAttribute && e.target.hasAttribute('aria-invalid')) {
+        syncAria(e.target);
+      }
+    });
+
+    // Fallback for browsers without :user-invalid
+    const UserInvalidFallback = (() => {
+      const dirtyState = new WeakMap();
+      const updateState = (input) => {
+        const isValid = input.checkValidity();
+        input.classList.toggle('user-invalid-fallback', !isValid);
+        input.classList.toggle('user-valid-fallback', isValid);
+        if (!isValid) input.setAttribute('aria-invalid', 'true');
+        else input.removeAttribute('aria-invalid');
+      };
+      const handleEvent = (event) => {
+        const input = event.target;
+        if (!input || !input.checkValidity) return;
+        const state = dirtyState.get(input) || { hasInteracted: false, hasBlurred: false };
+        if (event.type === 'input' || event.type === 'change') {
+          state.hasInteracted = true;
+          dirtyState.set(input, state);
+          if (state.hasBlurred) updateState(input);
+        } else if (event.type === 'blur') {
+          state.hasBlurred = true;
+          dirtyState.set(input, state);
+          if (state.hasInteracted) updateState(input);
+        }
+      };
+      const init = (root = document) => {
+        if (window.CSS && CSS.supports && CSS.supports('selector(:user-invalid)')) return;
+        root.addEventListener('blur', handleEvent, true);
+        root.addEventListener('input', handleEvent);
+        root.addEventListener('change', handleEvent);
+      };
+      return { init };
+    })();
+    UserInvalidFallback.init(document.body);
+
+    const dialog = document.getElementById('gform-modal');
+
+    // Reset dialog.returnValue on close
+    dialog.addEventListener('close', () => {
+      dialog.returnValue = '';
+    });
+
+    // MANDATORY Fallback for browsers without <dialog closedby="any"> support (e.g., Safari)
+    if (!('closedBy' in HTMLDialogElement.prototype)) {
+      dialog.addEventListener('click', (event) => {
+        if (event.target !== dialog) return;
+        const rect = dialog.getBoundingClientRect();
+        const isDialogContent = (
+          rect.top <= event.clientY &&
+          event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX &&
+          event.clientX <= rect.left + rect.width
+        );
+        if (isDialogContent) return;
+        dialog.close();
+      });
+    }
+
+    // 1. Inline Hero Form -> Pre-fills Email & Opens Modal
+    document.getElementById('inline-email-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const emailInput = document.getElementById('email');
+      if (!emailInput.checkValidity()) {
+        emailInput.reportValidity();
+        return;
+      }
+      document.getElementById('gf-email').value = emailInput.value.trim();
+      dialog.showModal();
+    });
+
+    // 2. Full Modal Form -> Submits to Google Forms + Backend Email Automation
+    document.getElementById('google-full-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const lang = document.documentElement.lang || 'en';
+      const dict = i18n[lang];
+      const submitBtn = document.getElementById('modal-submit-btn');
+
+      const fullName = document.getElementById('gf-name').value.trim();
+      const email = document.getElementById('gf-email').value.trim();
+      const whatsapp = document.getElementById('gf-whatsapp').value.trim();
+      const sourceRadio = form.querySelector('input[name="entry.955042020"]:checked');
+      const sourceChannel = sourceRadio ? sourceRadio.value : '';
+      const motivations = Array.from(form.querySelectorAll('input[name="entry.361352581"]:checked')).map((el) => el.value);
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = dict.modalSending;
+
+      // Direct client-side no-cors POST to Google Forms as backup
+      const gfParams = new URLSearchParams();
+      gfParams.append('entry.1902514531', fullName);
+      gfParams.append('entry.254744361', email);
+      if (whatsapp) gfParams.append('entry.1527128844', whatsapp);
+      if (sourceChannel) gfParams.append('entry.955042020', sourceChannel);
+      motivations.forEach((m) => gfParams.append('entry.361352581', m));
+
+      try {
+        // 1. Primary static-compatible submission directly to Google Forms (works on AWS S3 with zero backend)
+        await fetch(GOOGLE_FORM_ACTION, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: gfParams.toString()
+        });
+
+        // 2. Optional local dev server sync (ignored automatically on static hosts like S3)
+        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+          await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              fullName,
+              email,
+              whatsapp,
+              sourceChannel,
+              motivations,
+              lang,
+              timestamp: new Date().toISOString()
+            })
+          }).catch(() => {});
+        }
+      } catch (_) {
+        // Never persist PII (name, email, phone) in client-side localStorage
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = dict.modalCta;
+      }
+
+      form.reset();
+      document.getElementById('email').value = '';
+      dialog.close('submitted');
+      document.getElementById('status-banner').className = 'status-banner success';
+    });
+  </script>
+</body>
+
+</html>

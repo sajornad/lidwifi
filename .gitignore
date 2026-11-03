@@ -1,0 +1,9 @@
+.DS_Store
+build/
+*.dmg
+video/node_modules/
+video/snaps/
+video/*.mp4
+web/leads.json
+web/leads.csv
+web/sent_emails.json
