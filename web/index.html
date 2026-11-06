@@ -76,7 +76,7 @@
       align-items: center;
       padding-bottom: var(--s-3);
       border-bottom: 2px solid var(--ink);
-      margin-bottom: var(--s-6);
+      margin-bottom: var(--s-4);
       gap: var(--s-4);
       flex-wrap: wrap;
     }
@@ -165,12 +165,19 @@
 
     /* GIANT HERO TYPOGRAPHY */
     .hero-title {
-      font-size: clamp(4rem, 9.5vw, 7.75rem);
+      font-size: clamp(2.5rem, 8.2vw, 6.5rem);
       line-height: 0.94;
       font-weight: 900;
       letter-spacing: -0.045em;
-      margin-bottom: var(--s-6);
+      margin-bottom: var(--s-4);
       color: var(--ink);
+      overflow-wrap: break-word;
+    }
+
+    @media (max-width: 680px) {
+      .hero-title {
+        font-size: clamp(2.25rem, 10vw, 3.25rem);
+      }
     }
 
     .hero-title .line-1,
@@ -194,13 +201,13 @@
     }
 
     .hero-lead {
-      font-size: clamp(1.25rem, 2vw, 1.625rem);
-      line-height: 1.5;
+      font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+      line-height: 1.45;
       color: var(--ink-secondary);
       max-width: 58ch;
       font-weight: 500;
       letter-spacing: -0.01em;
-      margin-bottom: var(--s-6);
+      margin-bottom: var(--s-4);
     }
 
     /* INLINE HERO CAPTURE CARD */
@@ -208,7 +215,7 @@
       background: var(--surface);
       border: 2px solid var(--border-strong);
       border-radius: 20px;
-      padding: var(--s-6);
+      padding: var(--s-4) var(--s-6);
       max-width: 864px;
       box-shadow: 0 8px 0 var(--border-strong);
       margin-bottom: var(--s-6);
@@ -245,6 +252,10 @@
     }
 
     @media (max-width: 680px) {
+      .capture-card {
+        padding: var(--s-4);
+      }
+
       .form-bar {
         grid-template-columns: 1fr;
       }
@@ -252,13 +263,14 @@
 
     .email-input,
     .modal-input {
-      height: 64px;
+      min-height: 60px;
+      min-width: 0;
       width: 100%;
       background: #FFFFFF;
       border: 2px solid var(--ink);
       border-radius: 12px;
       padding: 0 var(--s-6);
-      font-size: 20px;
+      font-size: 1.25rem;
       font-weight: 500;
       color: var(--ink);
       outline: none;
@@ -266,9 +278,17 @@
     }
 
     .modal-input {
-      height: 52px;
-      font-size: 16px;
+      min-height: 52px;
+      font-size: 1rem;
       padding: 0 var(--s-4);
+    }
+
+    @media (max-width: 680px) {
+      .email-input {
+        min-height: 56px;
+        font-size: 1rem;
+        padding: 0 var(--s-4);
+      }
     }
 
     .email-input::placeholder,
@@ -312,7 +332,7 @@
     }
 
     .submit-btn {
-      height: 64px;
+      min-height: 60px;
       padding: 0 var(--s-8);
       border: 2px solid var(--ink);
       border-radius: 12px;
@@ -320,7 +340,7 @@
       background: var(--brand-grad);
       color: #FFFFFF;
       text-shadow: 0 1px 2px rgba(17, 19, 21, 0.35);
-      font-size: 20px;
+      font-size: 1.25rem;
       font-weight: 800;
       letter-spacing: -0.015em;
       cursor: pointer;
@@ -330,6 +350,17 @@
       gap: var(--s-2);
       white-space: nowrap;
       transition: filter 0.15s ease, transform 0.1s ease;
+    }
+
+    @media (max-width: 680px) {
+      .submit-btn {
+        width: 100%;
+        min-height: 56px;
+        padding: var(--s-3) var(--s-4);
+        font-size: 1.0625rem;
+        white-space: normal;
+        text-align: center;
+      }
     }
 
     .submit-btn:hover {
@@ -399,6 +430,7 @@
       margin: auto;
       width: min(640px, calc(100vw - 32px));
       max-height: calc(100vh - 48px);
+      max-height: calc(100dvh - 32px);
       background: var(--surface);
       color: var(--ink);
       border: 2px solid var(--ink);
@@ -422,7 +454,9 @@
     .modal-inner {
       padding: var(--s-8);
       overflow-y: auto;
+      scroll-padding-block: var(--s-6);
       max-height: calc(100vh - 52px);
+      max-height: calc(100dvh - 36px);
     }
 
     @media (max-width: 640px) {
@@ -456,8 +490,8 @@
     }
 
     .close-btn {
-      width: 40px;
-      height: 40px;
+      min-width: 48px;
+      min-height: 48px;
       border-radius: 10px;
       border: 2px solid var(--ink);
       background: var(--bg);
@@ -475,7 +509,9 @@
     }
 
     .q-group {
-      margin-bottom: var(--s-6);
+      border: 0;
+      padding: 0;
+      margin: 0 0 var(--s-6) 0;
     }
 
     .q-label {
@@ -506,13 +542,20 @@
 
     .choice-pill input {
       position: absolute;
-      opacity: 0;
-      pointer-events: none;
+      clip-path: inset(50%);
+      overflow: hidden;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      border: 0;
+      white-space: nowrap;
     }
 
     .choice-pill span {
       display: inline-flex;
       align-items: center;
+      min-height: 44px;
       gap: 6px;
       padding: 10px 14px;
       border-radius: 10px;
@@ -522,6 +565,12 @@
       font-size: 14px;
       font-weight: 700;
       transition: all 0.15s ease;
+    }
+
+    @media (pointer: coarse) {
+      .choice-pill span {
+        min-height: 48px;
+      }
     }
 
     .choice-pill input:checked + span {
@@ -546,8 +595,8 @@
 
     .modal-submit {
       width: 100%;
-      height: 56px;
-      font-size: 18px;
+      min-height: 56px;
+      font-size: 1.125rem;
     }
 
     /* VALUE PILLARS (LESS TEXT, MORE VALUE) */
@@ -567,7 +616,7 @@
       background: var(--surface);
       border: 2px solid var(--ink);
       border-radius: 16px;
-      padding: var(--s-6);
+      padding: var(--s-4) var(--s-6);
     }
 
     .value-metric {
@@ -671,8 +720,8 @@
           </div>
           <div class="form-bar">
             <input type="email" id="email" name="email" class="email-input" required autocomplete="email"
-              inputmode="email" autocorrect="off" autocapitalize="none" placeholder="you@domain.com"
-              aria-describedby="email-hint" aria-errormessage="email-error">
+              inputmode="email" enterkeyhint="go" autocorrect="off" autocapitalize="off" spellcheck="false"
+              placeholder="you@domain.com" aria-describedby="email-hint" aria-errormessage="email-error">
             <button type="submit" class="submit-btn" id="open-modal-btn" data-i18n="cta">
               Get Download Link →
             </button>
@@ -734,7 +783,7 @@
             <span data-i18n="qName">What is your full name?</span><span class="q-req" aria-hidden="true">*</span>
           </label>
           <input type="text" id="gf-name" name="entry.1902514531" class="modal-input" required autocomplete="name"
-            placeholder="Alex Rivera" autofocus>
+            autocapitalize="words" enterkeyhint="next" placeholder="Alex Rivera" autofocus>
         </div>
 
         <!-- 2. Email Address (entry.254744361) -->
@@ -743,7 +792,8 @@
             <span data-i18n="qEmail">What is your email address?</span><span class="q-req" aria-hidden="true">*</span>
           </label>
           <input type="email" id="gf-email" name="entry.254744361" class="modal-input" required autocomplete="email"
-            inputmode="email" placeholder="you@domain.com">
+            inputmode="email" enterkeyhint="next" autocorrect="off" autocapitalize="off" spellcheck="false"
+            placeholder="you@domain.com">
         </div>
 
         <!-- 3. WhatsApp Number optional (entry.1527128844) -->
@@ -752,13 +802,13 @@
             What is your WhatsApp number (optional)?
           </label>
           <input type="tel" id="gf-whatsapp" name="entry.1527128844" class="modal-input" autocomplete="tel"
-            inputmode="tel" placeholder="+1 555 000 0000">
+            inputmode="tel" enterkeyhint="done" autocorrect="off" spellcheck="false" placeholder="+1 555 000 0000">
         </div>
 
         <!-- 4. How did you hear about LidWiFi? (entry.955042020) -->
-        <div class="q-group">
-          <span class="q-label" data-i18n="qHear">How did you hear about LidWiFi?</span>
-          <div class="choice-grid" role="radiogroup" aria-label="How did you hear about LidWiFi?">
+        <fieldset class="q-group">
+          <legend class="q-label" data-i18n="qHear">How did you hear about LidWiFi?</legend>
+          <div class="choice-grid">
             <label class="choice-pill">
               <input type="radio" name="entry.955042020" value="Product Hunt">
               <span>Product Hunt</span>
@@ -780,12 +830,12 @@
               <span data-i18n="optOther">Other</span>
             </label>
           </div>
-        </div>
+        </fieldset>
 
         <!-- 5. Primary motivation (entry.361352581) -->
-        <div class="q-group">
-          <span class="q-label" data-i18n="qMotivation">What is your primary motivation for using LidWiFi?</span>
-          <div class="choice-grid" role="group" aria-label="Primary motivation">
+        <fieldset class="q-group">
+          <legend class="q-label" data-i18n="qMotivation">What is your primary motivation for using LidWiFi?</legend>
+          <div class="choice-grid">
             <label class="choice-pill">
               <input type="checkbox" name="entry.361352581" value="Extend battery life" checked>
               <span data-i18n="motBattery">Extend battery life</span>
@@ -803,7 +853,7 @@
               <span data-i18n="motEfficiency">Improve power efficiency</span>
             </label>
           </div>
-        </div>
+        </fieldset>
 
         <div class="modal-actions">
           <button type="submit" class="submit-btn modal-submit" id="modal-submit-btn" data-i18n="modalCta">
@@ -920,6 +970,8 @@
       });
       const emailInput = document.getElementById('email');
       if (emailInput) emailInput.placeholder = dict.placeholder;
+      const modalEmailInput = document.getElementById('gf-email');
+      if (modalEmailInput) modalEmailInput.placeholder = dict.placeholder;
       document.querySelectorAll('.lang-btn').forEach((btn) => {
         const isCurrent = btn.getAttribute('data-lang') === lang;
         btn.classList.toggle('active', isCurrent);
@@ -956,6 +1008,15 @@
       };
       const handleEvent = (event) => {
         const input = event.target;
+        if (event.type === 'reset') {
+          const controls = input.elements || [];
+          for (const control of controls) {
+            dirtyState.delete(control);
+            control.classList.remove('user-invalid-fallback', 'user-valid-fallback');
+            control.removeAttribute('aria-invalid');
+          }
+          return;
+        }
         if (!input || !input.checkValidity) return;
         const state = dirtyState.get(input) || { hasInteracted: false, hasBlurred: false };
         if (event.type === 'input' || event.type === 'change') {
@@ -973,6 +1034,7 @@
         root.addEventListener('blur', handleEvent, true);
         root.addEventListener('input', handleEvent);
         root.addEventListener('change', handleEvent);
+        root.addEventListener('reset', handleEvent, true);
       };
       return { init };
     })();
